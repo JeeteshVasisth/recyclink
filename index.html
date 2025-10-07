@@ -1,0 +1,752 @@
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Recyclink | Sell Your Scrap Online</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script>
+            tailwind.config = {
+                theme: {
+                    extend: {
+                        colors: {
+                            "brand-green": "#4CAF50",
+                            "brand-orange": "#FF9800",
+                            "brand-dark": "#3E2723",
+                            "brand-light": "#F5F5F5",
+                            "brand-gray": "#616161",
+                            "brand-light-gray": "#EEEEEE",
+                        },
+                        fontFamily: {
+                            sans: ["Inter", "sans-serif"],
+                        },
+                    },
+                },
+            };
+        </script>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+            rel="stylesheet"
+        />
+        <link rel="stylesheet" href="styles.css" />
+        <script type="importmap">
+            {
+                "imports": {
+                    "@google/genai": "https://aistudiocdn.com/@google/genai@^1.21.0"
+                }
+            }
+        </script>
+        <link rel="stylesheet" href="/index.css" />
+    </head>
+    <body class="bg-brand-light text-brand-dark">
+        <!-- Header -->
+        <header
+            class="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
+        >
+            <div class="container mx-auto px-6 py-4">
+                <div class="flex items-center justify-between">
+                    <a href="#hero" class="flex items-center space-x-3 z-50">
+                        <span class="text-2xl font-bold text-brand-light"
+                            >Recyclink</span
+                        >
+                    </a>
+                    <!-- Desktop Nav -->
+                    <div class="hidden lg:flex items-center space-x-8">
+                        <nav class="flex items-center space-x-8">
+                            <a
+                                href="#why-us"
+                                class="text-brand-light hover:text-brand-orange transition-colors duration-300 font-medium"
+                                >Why Us</a
+                            >
+                            <a
+                                href="#services"
+                                class="text-brand-light hover:text-brand-orange transition-colors duration-300 font-medium"
+                                >What We Buy</a
+                            >
+                            <a
+                                href="#identifier"
+                                class="text-brand-light hover:text-brand-orange transition-colors duration-300 font-medium"
+                                >Identifier</a
+                            >
+                            <a
+                                href="#process"
+                                class="text-brand-light hover:text-brand-orange transition-colors duration-300 font-medium"
+                                >Our Process</a
+                            >
+                            <a
+                                href="#ai-tools"
+                                class="text-brand-light hover:text-brand-orange transition-colors duration-300 font-medium"
+                                >Calculator</a
+                            >
+                            <a
+                                href="#contact"
+                                class="text-brand-light hover:text-brand-orange transition-colors duration-300 font-medium"
+                                >Contact</a
+                            >
+                        </nav>
+                        <button
+                            data-scroll-to="#contact"
+                            class="bg-brand-orange hover:bg-opacity-90 text-white font-bold py-2 px-6 rounded-full transition-transform duration-300 ease-in-out transform hover:scale-105 whitespace-nowrap"
+                        >
+                            Schedule Pickup
+                        </button>
+                    </div>
+                    <!-- Mobile Menu Button -->
+                    <div class="lg:hidden">
+                        <button
+                            id="mobile-menu-button"
+                            class="text-white focus:outline-none"
+                            aria-label="Open navigation menu"
+                        >
+                            <svg
+                                class="w-8 h-8"
+                                fill="none"
+                                stroke="currentColor"
+                                viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg"
+                            >
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="M4 6h16M4 12h16m-7 6h7"
+                                ></path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <!-- Mobile Menu -->
+            <div
+                id="mobile-menu"
+                class="lg:hidden fixed top-0 right-0 h-full w-80 max-w-[85vw] bg-brand-dark/95 backdrop-blur-lg transform translate-x-full transition-transform duration-300 ease-in-out z-50"
+            >
+                <div class="flex flex-col p-6 h-full">
+                    <div class="flex justify-end mb-6">
+                        <button
+                            id="mobile-menu-close-button"
+                            class="text-white focus:outline-none"
+                            aria-label="Close navigation menu"
+                        >
+                            <svg
+                                class="w-8 h-8"
+                                fill="none"
+                                stroke="currentColor"
+                                viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg"
+                            >
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="M6 18L18 6M6 6l12 12"
+                                ></path>
+                            </svg>
+                        </button>
+                    </div>
+                    <nav class="flex flex-col items-start space-y-6">
+                        <a
+                            href="#why-us"
+                            class="text-white text-2xl font-bold hover:text-brand-orange transition-colors"
+                            >Why Us</a
+                        >
+                        <a
+                            href="#services"
+                            class="text-white text-2xl font-bold hover:text-brand-orange transition-colors"
+                            >What We Buy</a
+                        >
+                        <a
+                            href="#identifier"
+                            class="text-white text-2xl font-bold hover:text-brand-orange transition-colors"
+                            >Identifier</a
+                        >
+                        <a
+                            href="#process"
+                            class="text-white text-2xl font-bold hover:text-brand-orange transition-colors"
+                            >Our Process</a
+                        >
+                        <a
+                            href="#ai-tools"
+                            class="text-white text-2xl font-bold hover:text-brand-orange transition-colors"
+                            >Calculator</a
+                        >
+                        <a
+                            href="#contact"
+                            class="text-white text-2xl font-bold hover:text-brand-orange transition-colors"
+                            >Contact</a
+                        >
+                        <button
+                            data-scroll-to="#contact"
+                            class="mt-4 bg-brand-orange hover:bg-opacity-90 text-white font-bold py-3 px-8 rounded-full text-lg"
+                        >
+                            Schedule Pickup
+                        </button>
+                    </nav>
+                </div>
+            </div>
+        </header>
+
+        <main>
+            <!-- Hero Section -->
+            <section
+                id="hero"
+                class="relative h-screen flex items-center justify-center text-center text-white overflow-hidden"
+            >
+                <div class="absolute inset-0 bg-black opacity-60 z-10"></div>
+                <img
+                    src="https://picsum.photos/seed/scrapmarket/1920/1080"
+                    alt="Scrap materials background"
+                    class="absolute inset-0 w-full h-full object-cover"
+                />
+                <div
+                    class="relative z-20 container mx-auto px-6 animate-fade-in-up"
+                >
+                    <h1
+                        class="text-4xl sm:text-5xl lg:text-7xl font-extrabold leading-tight mb-4"
+                        style="text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5)"
+                    >
+                        Turn Your Scrap into Cash
+                    </h1>
+                    <p
+                        class="text-base sm:text-lg md:text-2xl max-w-3xl mx-auto mb-8 text-brand-light"
+                        style="text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5)"
+                    >
+                        Connect with your local scrap collector. Get fair prices
+                        for your paper, plastics, and metals, right from your
+                        doorstep.
+                    </p>
+                    <button
+                        data-scroll-to="#contact"
+                        class="bg-brand-green hover:bg-opacity-90 text-white font-bold py-4 px-10 rounded-full text-lg transition-transform duration-300 ease-in-out transform hover:scale-105 shadow-lg"
+                    >
+                        Schedule a Free Pickup
+                    </button>
+                </div>
+            </section>
+
+            <!-- Why Us Section -->
+            <section id="why-us" class="py-16 lg:py-20 bg-brand-light">
+                <div class="container mx-auto px-6">
+                    <div class="grid lg:grid-cols-2 gap-12 items-center">
+                        <div class="animate-fade-in-up">
+                            <a href="https://ibb.co/FbpHtBty"
+                                ><img
+                                    src="https://i.ibb.co/jvtJFLFQ/scrapyard-70908-960-720.jpg"
+                                    alt="scrapyard-70908-960-720"
+                                    border="0"
+                            /></a>
+                        </div>
+                        <div
+                            class="animate-fade-in-up"
+                            style="animation-delay: 200ms"
+                        >
+                            <h2
+                                class="text-3xl md:text-4xl font-extrabold text-brand-dark mb-6"
+                            >
+                                Why Choose Recyclink?
+                            </h2>
+                            <p
+                                class="text-base md:text-lg text-brand-gray mb-8"
+                            >
+                                We are your trusted partners, connecting you
+                                with local scrap dealers for a transparent,
+                                convenient, and rewarding experience.
+                            </p>
+                            <div class="space-y-6">
+                                <div class="flex items-start">
+                                    <div class="flex-shrink-0">
+                                        <div
+                                            class="bg-brand-light-gray p-3 rounded-full"
+                                        >
+                                            <svg
+                                                class="w-6 h-6 text-brand-green"
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                fill="none"
+                                                viewBox="0 0 24 24"
+                                                stroke-width="1.5"
+                                                stroke="currentColor"
+                                            >
+                                                <path
+                                                    stroke-linecap="round"
+                                                    stroke-linejoin="round"
+                                                    d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                                                />
+                                            </svg>
+                                        </div>
+                                    </div>
+                                    <div class="ml-4">
+                                        <h3
+                                            class="text-xl font-bold text-brand-dark"
+                                        >
+                                            Fair & Transparent Pricing
+                                        </h3>
+                                        <p class="mt-1 text-brand-gray">
+                                            Our platform ensures you get
+                                            competitive rates for your scrap,
+                                            with on-the-spot weighing and
+                                            payment.
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start">
+                                    <div class="flex-shrink-0">
+                                        <div
+                                            class="bg-brand-light-gray p-3 rounded-full"
+                                        >
+                                            <svg
+                                                class="w-6 h-6 text-brand-green"
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                fill="none"
+                                                viewBox="0 0 24 24"
+                                                stroke-width="1.5"
+                                                stroke="currentColor"
+                                            >
+                                                <path
+                                                    stroke-linecap="round"
+                                                    stroke-linejoin="round"
+                                                    d="M8.25 18.75a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 01-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h1.125c.621 0 1.125-.504 1.125-1.125V14.25m-17.25 4.5v-1.875a3.375 3.375 0 013.375-3.375h9.75a3.375 3.375 0 013.375 3.375v1.875"
+                                                />
+                                            </svg>
+                                        </div>
+                                    </div>
+                                    <div class="ml-4">
+                                        <h3
+                                            class="text-xl font-bold text-brand-dark"
+                                        >
+                                            Convenient Doorstep Pickup
+                                        </h3>
+                                        <p class="mt-1 text-brand-gray">
+                                            No more hassle. Schedule a pickup,
+                                            and a verified local scrap collector
+                                            will arrive at your preferred time.
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start">
+                                    <div class="flex-shrink-0">
+                                        <div
+                                            class="bg-brand-light-gray p-3 rounded-full"
+                                        >
+                                            <svg
+                                                class="w-6 h-6 text-brand-green"
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                fill="none"
+                                                viewBox="0 0 24 24"
+                                                stroke-width="1.5"
+                                                stroke="currentColor"
+                                            >
+                                                <path
+                                                    stroke-linecap="round"
+                                                    stroke-linejoin="round"
+                                                    d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582"
+                                                />
+                                            </svg>
+                                        </div>
+                                    </div>
+                                    <div class="ml-4">
+                                        <h3
+                                            class="text-xl font-bold text-brand-dark"
+                                        >
+                                            Support Local & The Environment
+                                        </h3>
+                                        <p class="mt-1 text-brand-gray">
+                                            Empower local entrepreneurs and
+                                            contribute to a greener planet with
+                                            every item you sell.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Services Section -->
+            <section id="services" class="py-16 lg:py-20 bg-brand-light-gray">
+                <div class="container mx-auto px-6">
+                    <div class="text-center mb-12 animate-fade-in-up">
+                        <h2
+                            class="text-3xl md:text-4xl font-extrabold text-brand-dark"
+                        >
+                            What We Buy
+                        </h2>
+                        <p
+                            class="mt-4 text-base md:text-lg text-brand-gray max-w-2xl mx-auto"
+                        >
+                            We accept a wide range of household and office
+                            scrap. Check out our categories below.
+                        </p>
+                    </div>
+                    <div
+                        class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8"
+                    >
+                        <!-- Service Cards will be injected here by JS -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- Identifier Section -->
+            <section id="identifier" class="py-16 lg:py-20 bg-brand-light">
+                <div class="container mx-auto px-6">
+                    <div class="text-center mb-12">
+                        <h2
+                            class="text-3xl md:text-4xl font-extrabold text-brand-dark"
+                        >
+                            AI Scrap Identifier
+                        </h2>
+                        <p
+                            class="mt-4 text-base md:text-lg text-brand-gray max-w-2xl mx-auto"
+                        >
+                            Not sure what it's worth? Upload a photo and our AI
+                            will identify the material and give you an estimated
+                            price!
+                        </p>
+                    </div>
+
+                    <div
+                        class="max-w-3xl mx-auto bg-white rounded-lg shadow-2xl p-8"
+                    >
+                        <div
+                            class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center"
+                        >
+                            <div
+                                class="relative border-2 border-dashed border-gray-300 rounded-lg h-64 flex items-center justify-center"
+                            >
+                                <img
+                                    id="waste-image-preview"
+                                    src=""
+                                    alt="scrap preview"
+                                    class="absolute inset-0 w-full h-full object-contain rounded-lg hidden p-2"
+                                />
+                                <label
+                                    for="waste-upload-input"
+                                    id="waste-upload-label"
+                                    class="cursor-pointer text-center p-4"
+                                >
+                                    <svg
+                                        class="w-16 h-16 mx-auto text-gray-400"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        fill="none"
+                                        viewBox="0 0 24 24"
+                                        stroke="currentColor"
+                                        stroke-width="2"
+                                    >
+                                        <path
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"
+                                        />
+                                    </svg>
+                                    <span
+                                        class="mt-2 block font-medium text-brand-dark"
+                                        >Click to upload a photo</span
+                                    >
+                                    <span
+                                        class="mt-1 block text-sm text-gray-500"
+                                        >PNG, JPG, or WEBP</span
+                                    >
+                                </label>
+                                <input
+                                    id="waste-upload-input"
+                                    type="file"
+                                    class="hidden"
+                                    accept="image/png, image/jpeg, image/webp"
+                                />
+                            </div>
+                            <div
+                                id="identifier-result-area"
+                                class="text-center"
+                            >
+                                <!-- JS will inject button/results here -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Process Section -->
+            <section id="process" class="py-16 lg:py-20 bg-brand-light-gray">
+                <div class="container mx-auto px-6">
+                    <div class="text-center mb-16">
+                        <h2
+                            class="text-3xl md:text-4xl font-extrabold text-brand-dark"
+                        >
+                            Our 4-Step Process
+                        </h2>
+                        <p
+                            class="mt-4 text-base md:text-lg text-brand-gray max-w-2xl mx-auto"
+                        >
+                            Simple, transparent, and rewarding from start to
+                            finish.
+                        </p>
+                    </div>
+                    <div
+                        id="process-steps-container"
+                        class="flex flex-col md:flex-row items-start justify-center space-y-8 md:space-y-0 md:space-x-4"
+                    >
+                        <!-- Process steps will be injected here by JS -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- AI Value Calculator Section -->
+            <section id="ai-tools" class="py-16 lg:py-20 bg-brand-light">
+                <div class="container mx-auto px-6">
+                    <div class="text-center mb-12 animate-fade-in-up">
+                        <h2
+                            class="text-3xl md:text-4xl font-extrabold text-brand-dark"
+                        >
+                            Scrap Value Calculator
+                        </h2>
+                        <p
+                            class="mt-4 text-base md:text-lg text-brand-gray max-w-2xl mx-auto"
+                        >
+                            Use our AI tool to get an instant estimate of your
+                            scrap's value and environmental impact.
+                        </p>
+                    </div>
+                    <div
+                        class="max-w-2xl mx-auto bg-white p-8 rounded-lg shadow-lg"
+                    >
+                        <form id="value-calculator-form" class="space-y-4">
+                            <select
+                                id="scrap-type-calculator"
+                                required
+                                class="w-full bg-brand-light-gray border border-gray-300 text-brand-dark rounded-md p-3 focus:ring-brand-green focus:border-brand-green"
+                            >
+                                <option value="" disabled selected>
+                                    Select scrap type...
+                                </option>
+                                <option value="Newspaper">Newspaper</option>
+                                <option value="Cardboard">Cardboard</option>
+                                <option value="Plastic Bottles (PET)">
+                                    Plastic Bottles (PET)
+                                </option>
+                                <option value="Steel">Steel</option>
+                                <option value="Aluminum Cans">
+                                    Aluminum Cans
+                                </option>
+                                <option value="Copper Wire">Copper Wire</option>
+                                <option value="Old Laptop">Old Laptop</option>
+                            </select>
+                            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                                <input
+                                    id="scrap-weight-calculator"
+                                    type="number"
+                                    placeholder="e.g., 10"
+                                    required
+                                    class="sm:col-span-2 w-full bg-brand-light-gray border border-gray-300 text-brand-dark rounded-md p-3 focus:ring-brand-green focus:border-brand-green"
+                                />
+                                <select
+                                    id="scrap-unit-calculator"
+                                    required
+                                    class="w-full bg-brand-light-gray border border-gray-300 text-brand-dark rounded-md p-3 focus:ring-brand-green focus:border-brand-green"
+                                >
+                                    <option value="kg">kg</option>
+                                    <option value="pieces">pieces</option>
+                                </select>
+                            </div>
+                            <button
+                                type="submit"
+                                class="w-full bg-brand-orange hover:bg-opacity-90 text-white font-bold py-3 px-6 rounded-full transition-colors"
+                            >
+                                Calculate Value
+                            </button>
+                        </form>
+                        <div id="calculator-results" class="mt-6"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Contact Section -->
+            <section
+                id="contact"
+                class="py-16 lg:py-20 bg-brand-dark text-white"
+            >
+                <div class="container mx-auto px-6">
+                    <div class="text-center mb-12">
+                        <h2 class="text-3xl md:text-4xl font-extrabold">
+                            Schedule a Pickup
+                        </h2>
+                        <p
+                            class="mt-4 text-base md:text-lg text-brand-light opacity-80 max-w-2xl mx-auto"
+                        >
+                            Ready to sell your scrap? Fill out the form below
+                            and we'll connect you with a local scrap collector.
+                        </p>
+                    </div>
+                    <div
+                        id="contact-form-container"
+                        class="max-w-2xl mx-auto bg-opacity-20 bg-white/10 rounded-lg shadow-2xl p-8"
+                    >
+                        <form id="contact-form">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <input
+                                    type="text"
+                                    name="name"
+                                    placeholder="Your Name"
+                                    required
+                                    class="bg-gray-700 border border-gray-600 text-white rounded-md p-3 focus:ring-brand-orange focus:border-brand-orange"
+                                />
+                                <input
+                                    type="text"
+                                    name="phone"
+                                    placeholder="Your Phone Number"
+                                    required
+                                    class="bg-gray-700 border border-gray-600 text-white rounded-md p-3 focus:ring-brand-orange focus:border-brand-orange"
+                                />
+                            </div>
+                            <div class="mt-6">
+                                <input
+                                    type="text"
+                                    name="address"
+                                    placeholder="Your Full Address"
+                                    required
+                                    class="w-full bg-gray-700 border border-gray-600 text-white rounded-md p-3 focus:ring-brand-orange focus:border-brand-orange"
+                                />
+                            </div>
+                            <div class="mt-6">
+                                <textarea
+                                    name="message"
+                                    rows="5"
+                                    placeholder="List the scrap items you have (e.g., 'approx. 10kg newspaper, 1 old fan, 20 plastic bottles')..."
+                                    required
+                                    class="w-full bg-gray-700 border border-gray-600 text-white rounded-md p-3 focus:ring-brand-orange focus:border-brand-orange"
+                                ></textarea>
+                            </div>
+                            <div class="mt-6 text-center">
+                                <button
+                                    id="contact-submit-button"
+                                    type="submit"
+                                    class="bg-brand-green hover:bg-opacity-90 text-white font-bold py-3 px-8 rounded-full text-lg transition-transform duration-300 ease-in-out transform hover:scale-105"
+                                >
+                                    Find My scrap collector
+                                </button>
+                                <p
+                                    id="contact-form-error"
+                                    class="text-red-400 mt-4 hidden"
+                                ></p>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="bg-brand-dark py-8 border-t border-gray-700">
+            <div
+                class="container mx-auto px-6 text-center text-brand-light opacity-80"
+            >
+                <p>&copy; 2025 Recyclink. All rights reserved.</p>
+                <p class="mt-2">
+                    Contact us:
+                    <a
+                        href="mailto:recyclink.co@gmail.com"
+                        class="text-brand-orange hover:underline"
+                        >recyclink.co@gmail.com</a
+                    >
+                </p>
+            </div>
+        </footer>
+
+        <!-- Chatbot -->
+        <aside id="chatbot-container" class="fixed bottom-6 right-6 z-50">
+            <!-- Button -->
+            <button
+                id="chatbot-toggle-button"
+                class="bg-brand-green text-white rounded-full p-4 shadow-lg hover:animate-none transition-transform transform hover:scale-110"
+                aria-label="Toggle chatbot"
+            >
+                <svg
+                    class="w-8 h-8"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                >
+                    <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"
+                    />
+                </svg>
+            </button>
+            <!-- Window -->
+            <div
+                id="chatbot-window"
+                class="hidden absolute bottom-20 right-0 w-80 h-[28rem] bg-brand-light rounded-lg shadow-2xl flex-col border border-gray-300"
+            >
+                <div
+                    class="flex items-center justify-between p-4 bg-brand-light-gray rounded-t-lg"
+                >
+                    <h3 class="text-lg font-bold text-brand-dark">
+                        Kabaadi Assistant
+                    </h3>
+                    <button
+                        id="chatbot-close-button"
+                        class="text-gray-600 hover:text-black"
+                        aria-label="Close chatbot"
+                    >
+                        <svg
+                            class="w-6 h-6"
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                        >
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                d="M6 18L18 6M6 6l12 12"
+                            />
+                        </svg>
+                    </button>
+                </div>
+                <div
+                    id="chatbot-messages"
+                    class="flex-1 p-4 space-y-4 overflow-y-auto bg-brand-light"
+                >
+                    <!-- Messages will be injected here -->
+                </div>
+                <div class="p-4 border-t border-gray-200 bg-brand-light-gray">
+                    <form id="chatbot-form" class="flex items-center space-x-2">
+                        <input
+                            id="chatbot-input"
+                            type="text"
+                            placeholder="Ask about scrap prices..."
+                            class="flex-1 bg-white border border-gray-300 text-brand-dark rounded-full py-2 px-4 focus:ring-brand-green focus:border-brand-green"
+                        />
+                        <button
+                            id="chatbot-submit-button"
+                            type="submit"
+                            class="bg-brand-green text-white rounded-full p-2"
+                            aria-label="Send message"
+                        >
+                            <svg
+                                class="w-6 h-6"
+                                xmlns="http://www.w3.org/2000/svg"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke-width="1.5"
+                                stroke="currentColor"
+                            >
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5"
+                                />
+                            </svg>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </aside>
+
+        <script type="module" src="/script.js"></script>
+    </body>
+</html>

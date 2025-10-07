@@ -1,0 +1,67 @@
+
+/* Custom Properties for Branding */
+:root {
+  --brand-dark: #3E2723; /* Earthy Brown */
+  --brand-green: #4CAF50;
+  --brand-orange: #FF9800;
+  --brand-light: #F5F5F5;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+}
+
+/* Header base styles */
+header {
+  background-color: rgba(62, 39, 35, 0.5); /* Using new brand-dark with alpha */
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+}
+
+/* Header scroll effect */
+header.scrolled {
+  background-color: var(--brand-dark);
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+}
+
+/* Custom Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.08);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.6s ease-out forwards;
+  opacity: 0; /* Start hidden */
+}
+
+/* Chatbot pulse animation */
+#chatbot-toggle-button {
+  animation: pulse 2.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Card hover effect */
+.card-hover-effect {
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+.card-hover-effect:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+}
